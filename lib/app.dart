@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import './styles.dart';
 import './screens/home.dart';
 
 class App extends StatelessWidget {
@@ -9,9 +10,7 @@ class App extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Home(),
-      theme: ThemeData(
-        primaryColor: Color.fromRGBO(255, 251, 236, 1),
-      ),
+      theme: themeData,
     );
   }
 }
