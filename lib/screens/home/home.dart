@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import './home_data.dart';
+
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
 
@@ -23,6 +25,16 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
   void dispose() {
     _pageController.dispose();
     super.dispose();
+  }
+
+  void _changePage(int index) {
+    /// changes current page to page at [index]
+
+    _pageController.animateToPage(
+      index,
+      duration: const Duration(milliseconds: 400),
+      curve: Curves.easeInOut,
+    );
   }
 
   @override
@@ -66,13 +78,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
               labelColor: Colors.black,
               unselectedLabelColor: Colors.grey,
               controller: TabController(vsync: this, length: tabs.length),
-              onTap: (int index) {
-                _pageController.animateToPage(
-                  index,
-                  duration: const Duration(milliseconds: 400),
-                  curve: Curves.easeInOut,
-                );
-              },
+              onTap: _changePage,
               tabs: tabs,
             ),
           ),
@@ -88,7 +94,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
           itemBuilder: (context, index) {
             return Padding(
               padding: const EdgeInsets.symmetric(horizontal: 15),
-              child: Page1(),
+              child: (index % 2 == 0) ? Page1() : Page2(),
             );
           },
         ),
@@ -96,56 +102,3 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
     );
   }
 }
-
-/* PlaceHolder content */
-
-class Page1 extends StatelessWidget {
-  const Page1({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return PageView(
-      scrollDirection: Axis.vertical,
-      pageSnapping: true,
-      controller: PageController(
-          viewportFraction: 0.7, initialPage: 0, keepPage: false),
-      children: [
-        Container(
-          margin: EdgeInsets.only(bottom: 50),
-          color: Color.fromRGBO(255, 200, 249, 1),
-        ),
-        Container(
-          margin: EdgeInsets.only(bottom: 50),
-          color: Color.fromRGBO(200, 255, 205, 1),
-        ),
-        Container(
-          margin: EdgeInsets.only(bottom: 50),
-          color: Color.fromRGBO(200, 245, 255, 1),
-        )
-      ],
-    );
-  }
-}
-
-List<Widget> tabs = <Widget>[
-  new Container(
-    width: 50,
-    child: Tab(text: 'Tab 1'),
-  ),
-  new Container(
-    width: 50,
-    child: Tab(text: 'Tab 2'),
-  ),
-  new Container(
-    width: 50,
-    child: Tab(text: 'Tab 3'),
-  ),
-  new Container(
-    width: 50,
-    child: Tab(text: 'Tab 4'),
-  ),
-  new Container(
-    width: 50,
-    child: Tab(text: 'Tab 5'),
-  ),
-];
