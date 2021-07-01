@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 
-const primaryColor = Color.fromRGBO(255, 251, 236, 1);
-const String fontNameDefault = "Roboto";
-
+// ThemeData
 final themeData = ThemeData(
   primaryColor: primaryColor,
   canvasColor: primaryColor,
@@ -19,6 +17,11 @@ final themeData = ThemeData(
   ),
 );
 
+// Custom Theme variables
+const primaryColor = Color.fromRGBO(255, 251, 236, 1);
+const String fontNameDefault = "Roboto";
+
+// Custom Theme Styles
 const appBarTextStyle = TextStyle(
   fontFamily: fontNameDefault,
   fontWeight: FontWeight.w400,

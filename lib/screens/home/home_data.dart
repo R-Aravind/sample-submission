@@ -1,6 +1,7 @@
 /* PlaceHolder content for Home*/
 import 'package:flutter/material.dart';
 
+// Tabs to be displayed in Home
 List<Widget> tabs = <Widget>[
   new Container(
     width: 50,
@@ -24,6 +25,9 @@ List<Widget> tabs = <Widget>[
   ),
 ];
 
+// Pages to be displayed in Home
+// Page1 if index is Odd
+// Page2 otherwise
 class Page1 extends StatelessWidget {
   const Page1({Key? key}) : super(key: key);
 
