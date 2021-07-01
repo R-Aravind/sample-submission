@@ -10,15 +10,18 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> with TickerProviderStateMixin {
-  PageController _pageController = PageController(
-    viewportFraction: 0.8,
-    initialPage: 0,
-    keepPage: false,
-  );
+  late PageController _pageController;
+  late TabController _tabController;
 
   @override
   void initState() {
     super.initState();
+    _tabController = new TabController(vsync: this, length: tabs.length);
+    _pageController = new PageController(
+      viewportFraction: 0.8,
+      initialPage: 0,
+      keepPage: false,
+    );
   }
 
   @override
@@ -35,6 +38,12 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
       duration: const Duration(milliseconds: 400),
       curve: Curves.easeInOut,
     );
+  }
+
+  void _changeTab(int index) {
+    /// changes current tab to tab at [index]
+
+    _tabController.animateTo(index);
   }
 
   @override
@@ -77,7 +86,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
               indicatorColor: Colors.transparent,
               labelColor: Colors.black,
               unselectedLabelColor: Colors.grey,
-              controller: TabController(vsync: this, length: tabs.length),
+              controller: _tabController,
               onTap: _changePage,
               tabs: tabs,
             ),
@@ -91,6 +100,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
           pageSnapping: true,
           controller: _pageController,
           itemCount: tabs.length,
+          onPageChanged: _changeTab,
           itemBuilder: (context, index) {
             return Padding(
               padding: const EdgeInsets.symmetric(horizontal: 15),
